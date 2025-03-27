@@ -2,10 +2,15 @@
 FROM php:8.2-apache
 
 # Instalar dependências do Kafka
+# Instalar dependências do Kafka e do sistema
 RUN apt-get update && apt-get install -y \
     librdkafka-dev \
+    libzip-dev \
+    unzip \
+    zip \
     && pecl install rdkafka \
-    && docker-php-ext-enable rdkafka
+    && docker-php-ext-enable rdkafka \
+    && docker-php-ext-install pdo pdo_mysql
 
 # Instalar extensões do PHP
 RUN docker-php-ext-install pdo pdo_mysql
