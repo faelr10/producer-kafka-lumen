@@ -19,8 +19,7 @@ class KafkaController extends BaseController
     {
         $message = $request->input('message', 'Mensagem padrão');
         $topic = $request->input('topic', 'meu-topico');
-
-        $result = $this->kafkaProducer->sendMessage($topic, $message);
+        $result = $this->kafkaProducer->sendMessage($topic, json_encode($message));
 
         return response()->json(['status' => $result]);
     }
